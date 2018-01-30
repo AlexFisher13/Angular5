@@ -10,7 +10,9 @@ import {UsersService} from "./users.service";
 export class AppComponent {
     users = [];
 
-    constructor(private usersService: UsersService) {
+    constructor(private usersService: UsersService) {}
+
+    ngOnInit() {
       this.users = this.usersService.users;
     }
 }
