@@ -1,13 +1,25 @@
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
+import "rxjs/add/operator/map";
+
+
+@Injectable()
 export class UsersService {
-  log(msg: any)   { console.log(msg); }
-  error(msg: any) { console.error(msg); }
-  warn(msg: any)  { console.warn(msg); }
 
+  constructor(private http: Http) {}
 
-  users = [
-    {name: "wtf1"},
-    {name: "wtf2"},
-    {name: "wtf3"},
-    {name: "wtf4"}
-  ]
+getUsers() {
+    return this.http.get('https://randomuser.me/api/?inc=gender,name,picture,location&results=8&nat=gb')
+      .map(response => response.json())
+      .map(response => response.results)
+      .map(users => {
+        return users.map( u => {
+          return {
+            name: u.name.first + ' ' + u.name.last,
+            image: u.picture.large,
+            geo: u.location.city + ' ' + u.location.state + ' ' + u.location.street
+          }
+        })
+      });
+    }
 }
