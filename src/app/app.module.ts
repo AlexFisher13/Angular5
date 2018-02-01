@@ -4,17 +4,21 @@ import { AppComponent } from './app.component';
 import {UserComponent} from "./user/user.component";
 import {HttpModule} from "@angular/http";
 import {HoverDirective} from "./user/hover.dorective";
+import {FormsModule} from "@angular/forms";
+import {SearchPipe} from "./search.pipe";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    HoverDirective
+    HoverDirective,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
